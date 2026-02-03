@@ -1,0 +1,20 @@
+{
+  "name": "better-plexer",
+  "version": "1.0.0",
+  "description": "Cloud-native chat multiplexer for AI coding sessions",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["cloudflare", "workers", "ai", "chat", "multiplexer"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260131.0",
+    "hono": "^4.11.7",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.61.1"
+  }
+}
