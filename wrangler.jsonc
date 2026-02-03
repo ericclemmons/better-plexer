@@ -1,0 +1,69 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "better-plexer",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-12-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Static assets
+  "assets": {
+    "directory": "./public"
+  },
+
+  // KV Namespace for session state
+  "kv_namespaces": [
+    {
+      "binding": "SESSIONS",
+      "id": "SESSIONS_KV_ID"
+    }
+  ],
+
+  // R2 Bucket for persistent storage
+  "r2_buckets": [
+    {
+      "binding": "STORAGE",
+      "bucket_name": "plexer-storage"
+    }
+  ],
+
+  // Durable Objects
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SESSION_COORDINATOR",
+        "class_name": "SessionCoordinator"
+      },
+      {
+        "name": "Sandbox",
+        "class_name": "Sandbox"
+      }
+    ]
+  },
+
+  // Migrations
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_classes": ["SessionCoordinator"],
+      "new_sqlite_classes": ["Sandbox"]
+    }
+  ],
+
+  // Container configuration for Sandbox
+  // Instance types: lite (1/16 vCPU, 256MB), basic (1/4, 1GB), standard-1 (1/2, 4GB),
+  //                 standard-2 (1 vCPU, 6GB), standard-3 (2, 8GB), standard-4 (4, 12GB)
+  "containers": [
+    {
+      "name": "sandbox",
+      "class_name": "Sandbox",
+      "image": "./Dockerfile",
+      "max_instances": 10,
+      "instance_type": "standard-1"
+    }
+  ],
+
+  // Environment variables
+  "vars": {
+    "ENVIRONMENT": "development"
+  }
+}

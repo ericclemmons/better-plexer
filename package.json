@@ -8,7 +8,13 @@
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": ["cloudflare", "workers", "ai", "chat", "multiplexer"],
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "ai",
+    "chat",
+    "multiplexer"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -16,5 +22,9 @@
     "hono": "^4.11.7",
     "typescript": "^5.9.3",
     "wrangler": "^4.61.1"
+  },
+  "dependencies": {
+    "@cloudflare/sandbox": "^0.7.0",
+    "ghostty-web": "^0.4.0"
   }
 }

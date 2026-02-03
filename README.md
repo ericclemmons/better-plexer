@@ -54,8 +54,11 @@ A cloud-native chat multiplexer for AI coding sessions. Think of it as a workspa
 # Install dependencies
 npm install
 
-# Start dev server
+# Start dev server (runs Wrangler on port 8788)
 npm run dev
+
+# In a separate terminal, start the PTY server for local terminal support
+node pty-server.mjs
 
 # Type check
 npm run typecheck
@@ -63,6 +66,13 @@ npm run typecheck
 # Deploy to Cloudflare
 npm run deploy
 ```
+
+### Local Development Notes
+
+- The dev server runs at `http://localhost:8788`
+- The PTY server runs on port 7681 and provides terminal I/O for sessions
+- Sandboxes in production use Cloudflare's container infrastructure; locally you'll need the PTY server running
+- Drag-and-drop images onto the terminal to attach them (saved to `/tmp/plexer-images/`)
 
 ## Project Structure
 
@@ -76,7 +86,7 @@ npm run deploy
 │       └── session-coordinator.ts  # Real-time coordination
 ├── public/
 │   └── styles.css            # UI styles
-├── wrangler.toml             # Cloudflare configuration
+├── wrangler.jsonc            # Cloudflare configuration
 └── package.json
 ```
 
@@ -97,8 +107,9 @@ Before deploying, you'll need to:
 - [x] API routes for session CRUD
 - [x] Gorgeous dark UI
 - [x] Durable Object for coordination
-- [ ] Cloudflare Sandbox integration
-- [ ] Terminal component (xterm.js/ghostty-web)
+- [x] Cloudflare Sandbox integration
+- [x] Terminal component (ghostty-web)
+- [x] Image drag-and-drop support
 - [ ] SKILLS.md for agent instructions
 - [ ] R2 bucket mounting
 - [ ] Multi-repo coordination logic

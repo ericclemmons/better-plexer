@@ -99,11 +99,13 @@ export type SessionEvent =
   | { type: 'output'; sessionId: string; data: string }
   | { type: 'error'; sessionId: string; message: string };
 
+import type { Sandbox } from '@cloudflare/sandbox';
+
 // Cloudflare bindings
 export interface Env {
   SESSIONS: KVNamespace;
   STORAGE: R2Bucket;
   SESSION_COORDINATOR: DurableObjectNamespace;
+  Sandbox: DurableObjectNamespace<Sandbox>;  // Cloudflare Sandbox
   ENVIRONMENT: string;
-  // SANDBOX: unknown; // Cloudflare Sandbox binding when available
 }
